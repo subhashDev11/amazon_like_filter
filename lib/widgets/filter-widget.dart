@@ -3,7 +3,6 @@ import 'package:amazon_like_filter/state/filter_cubit.dart';
 import 'package:amazon_like_filter/props/filter_props.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'filter_checkbox_title.dart';
 import 'filter_text.dart';
 import 'filter_text_button.dart';
