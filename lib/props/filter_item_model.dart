@@ -15,4 +15,11 @@ class FilterItemModel extends Equatable {
         filterTitle,
         filterKey,
       ];
+
+  Map<String, dynamic> toMap() {
+    return ({
+      'filter_title': filterTitle,
+      'filter_key': filterKey,
+    });
+  }
 }

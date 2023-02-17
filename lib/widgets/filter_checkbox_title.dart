@@ -1,8 +1,9 @@
-import 'package:amazon_like_filter/app_style_mixin.dart';
-import 'package:amazon_like_filter/filter/filter_text.dart';
+import 'package:amazon_like_filter/filter_style_mixin.dart';
 import 'package:flutter/material.dart';
 
-class FilterCheckboxTitle extends StatelessWidget with AppStyleMixin {
+import 'filter_text.dart';
+
+class FilterCheckboxTitle extends StatelessWidget with FilterStyleMixin {
   const FilterCheckboxTitle({
     Key? key,
     required this.selected,

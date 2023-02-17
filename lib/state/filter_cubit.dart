@@ -1,3 +1,4 @@
+import 'package:amazon_like_filter/props/applied_filter_model.dart';
 import 'package:amazon_like_filter/props/filter_item_model.dart';
 import 'package:amazon_like_filter/props/filter_list_model.dart';
 import 'package:amazon_like_filter/props/filter_props.dart';
@@ -43,5 +44,36 @@ class FilterCubit extends Cubit<FilterState> {
     emit(state.copyWith(
       filters: filterModels,
     ));
+  }
+
+  void onFilterSubmit() {
+    final appliedFilters = <AppliedFilterModel>[];
+    for (var element in state.filters) {
+      appliedFilters.add(AppliedFilterModel(
+        filterKey: element.filterKey,
+        applied: element.previousApplied,
+        filterTitle: element.title,
+      ));
+    }
+    if (filterProps.onFilterChange != null) {
+      filterProps.onFilterChange!(appliedFilters);
+    }
+  }
+
+  void onFilterRemove() {
+    final clearFilterList = <FilterListModel>[];
+    final filtered = [...state.filters];
+    for (var element in filtered) {
+      final newModel = element.copyWith(
+        previousApplied: [],
+      );
+      clearFilterList.add(newModel);
+    }
+    emit(state.copyWith(
+      filters: clearFilterList,
+    ));
+    if (filterProps.onFilterChange != null) {
+      filterProps.onFilterChange!([]);
+    }
   }
 }

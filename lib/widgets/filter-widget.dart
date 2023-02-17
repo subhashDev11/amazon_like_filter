@@ -1,11 +1,12 @@
-import 'package:amazon_like_filter/app_style_mixin.dart';
-import 'package:amazon_like_filter/filter/filter_checkbox_title.dart';
-import 'package:amazon_like_filter/filter/filter_cubit.dart';
-import 'package:amazon_like_filter/filter/filter_text.dart';
-import 'package:amazon_like_filter/filter/filter_text_button.dart';
+import 'package:amazon_like_filter/filter_style_mixin.dart';
+import 'package:amazon_like_filter/state/filter_cubit.dart';
 import 'package:amazon_like_filter/props/filter_props.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'filter_checkbox_title.dart';
+import 'filter_text.dart';
+import 'filter_text_button.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({
@@ -35,7 +36,7 @@ class Filter extends StatefulWidget {
   State<Filter> createState() => _FilterState();
 }
 
-class _FilterState extends State<Filter> with AppStyleMixin {
+class _FilterState extends State<Filter> with FilterStyleMixin {
   late FilterCubit _filterCubit;
 
   @override
@@ -190,6 +191,7 @@ class _FilterState extends State<Filter> with AppStyleMixin {
                     text: 'Reset',
                     isSecondary: true,
                     onTap: () {
+                      _filterCubit.onFilterRemove();
                       Navigator.of(context).pop();
                     },
                   ),
@@ -197,6 +199,7 @@ class _FilterState extends State<Filter> with AppStyleMixin {
                     text: 'Apply',
                     txtColor: getTheme(context).colorScheme.secondary,
                     onTap: () {
+                      _filterCubit.onFilterSubmit();
                       Navigator.of(context).pop();
                     },
                   ),
