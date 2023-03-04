@@ -49,6 +49,7 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<FilterCubit, FilterState>(
       builder: (_, state) {
+        final themeProps = _filterCubit.filterProps.themeProps;
         return Scaffold(
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,15 +61,19 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                 ),
                 child: FilterText(
                   title: _filterCubit.filterProps.title ?? 'Filters',
+                  style: themeProps?.titleStyle,
+                  fontColor: themeProps?.titleColor,
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              const Divider(
-                height: 1,
-                thickness: 1,
-              ),
+              themeProps?.divider ??
+                  Divider(
+                    height: 1,
+                    thickness: themeProps?.dividerThickness ?? 1,
+                    color: themeProps?.dividerColor ?? getDividerColor(context),
+                  ),
               Expanded(
                 child: Row(
                   children: [
@@ -99,9 +104,15 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                                   child: FilterText(
                                     title: e.title,
                                     fontSize: 17,
+                                    style: (index == state.activeFilterIndex)
+                                        ? themeProps?.activeFilterTextStyle
+                                        : themeProps?.inActiveFilterTextStyle,
                                     fontWeight: FontWeight.w500,
-                                    fontColor:
-                                        (index == state.activeFilterIndex) ? getTheme(context).primaryColor : null,
+                                    fontColor: (index ==
+                                            state.activeFilterIndex)
+                                        ? themeProps?.activeFilterTextColor ??
+                                            getTheme(context).primaryColor
+                                        : themeProps?.inActiveFilterTextColor,
                                   ),
                                 ),
                               );
@@ -110,11 +121,13 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                         ),
                       ),
                     ),
-                    Container(
-                      height: double.maxFinite,
-                      width: 1,
-                      color: getDividerColor(context),
-                    ),
+                    themeProps?.divider ??
+                        Container(
+                          height: double.maxFinite,
+                          width: themeProps?.dividerThickness ?? 1,
+                          color: themeProps?.dividerColor ??
+                              getDividerColor(context),
+                        ),
                     Expanded(
                       flex: 8,
                       child: Builder(builder: (context) {
@@ -129,11 +142,15 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                                   horizontal: 10,
                                 ),
                                 child: FilterText(
-                                  title: 'Showing for ${state.filters[state.activeFilterIndex].title ?? ''}',
-                                  style: getTitle2Theme(context)?.copyWith(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  title:
+                                      'Showing for ${state.filters[state.activeFilterIndex].title ?? ''}',
+                                  style: themeProps?.activeFilterHeaderStyle ??
+                                      getTitle2Theme(context)?.copyWith(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            themeProps?.activeFilterHeaderColor,
+                                      ),
                                 ),
                               ),
                               const SizedBox(
@@ -141,7 +158,9 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                               ),
                               Builder(
                                 builder: (_) {
-                                  final list = state.filters[state.activeFilterIndex].filterOptions;
+                                  final list = state
+                                      .filters[state.activeFilterIndex]
+                                      .filterOptions;
                                   if (list.isNotEmpty) {
                                     return Expanded(
                                       child: ListView.builder(
@@ -149,13 +168,19 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                                         itemBuilder: (_, index) {
                                           final item = list[index];
                                           return FilterCheckboxTitle(
+                                            checkBoxTileThemeProps: themeProps
+                                                ?.checkBoxTileThemeProps,
                                             selected: _filterCubit.checked(
-                                              state.filters[state.activeFilterIndex].previousApplied,
+                                              state
+                                                  .filters[
+                                                      state.activeFilterIndex]
+                                                  .previousApplied,
                                               item,
                                             ),
                                             title: item.filterTitle,
                                             onUpdate: (bool? value) {
-                                              _filterCubit.onFilterItemCheck(item);
+                                              _filterCubit
+                                                  .onFilterItemCheck(item);
                                             },
                                           );
                                         },
@@ -193,14 +218,18 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                       _filterCubit.onFilterRemove();
                       Navigator.of(context).pop();
                     },
+                    style: themeProps?.resetButtonStyle,
+                    txtColor: themeProps?.resetButtonColor,
                   ),
                   FilterTextButton(
                     text: 'Apply',
-                    txtColor: getTheme(context).colorScheme.secondary,
+                    txtColor: themeProps?.submitButtonColor ??
+                        getTheme(context).colorScheme.secondary,
                     onTap: () {
                       _filterCubit.onFilterSubmit();
                       Navigator.of(context).pop();
                     },
+                    style: themeProps?.submitButtonStyle,
                   ),
                   const SizedBox(
                     width: 10,

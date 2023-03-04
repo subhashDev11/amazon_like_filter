@@ -1,3 +1,29 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial release.
+
+## 0.0.2
+
+* Screenshot added.
+
+## 0.0.3
+
+* Theme properties added.
+  * Override the all theme properties of filter widget using below options -
+    1. TextStyle? titleStyle,
+    2. titleColor,
+    3. activeFilterHeaderColor,
+    4. inActiveFilterHeaderColor,
+    5. activeFilterHeaderStyle,
+    6. activeFilterTextStyle,
+    7. activeFilterTextColor,
+    8. inActiveFilterTextColor,
+    9. inActiveFilterTextStyle,
+    10. resetButtonColor,
+    11. resetButtonStyle,
+    12. submitButtonColor,
+    13. submitButtonStyle,
+    14. divider,
+    15. dividerColor,
+    16. dividerThickness,
+    17. checkBoxTileThemeProps,

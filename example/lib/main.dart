@@ -81,6 +81,18 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (_) {
               return FilterWidget(
                   filterProps: FilterProps(
+                themeProps: ThemeProps(
+                  activeFilterTextColor: Colors.orange,
+                  inActiveFilterTextColor: Colors.black,
+                  activeFilterHeaderColor: Colors.pink,
+                  dividerColor: Colors.yellow,
+                  checkBoxTileThemeProps: CheckBoxTileThemeProps(
+                    activeCheckBoxColor: Colors.green,
+                  ),
+                  submitButtonColor: Colors.purpleAccent,
+                  resetButtonColor: Colors.yellowAccent,
+                  dividerThickness: 5,
+                ),
                 onFilterChange: (value) {
                   setState(() {
                     applied = value;
@@ -90,13 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 filters: const [
                   FilterListModel(
                     filterOptions: [
-                      FilterItemModel(filterTitle: 'Education', filterKey: 'education'),
+                      FilterItemModel(
+                          filterTitle: 'Education', filterKey: 'education'),
                       FilterItemModel(
                         filterTitle: 'Information Technology',
                         filterKey: 'it',
                       ),
-                      FilterItemModel(filterTitle: 'Sports', filterKey: 'sports'),
-                      FilterItemModel(filterTitle: 'Transport', filterKey: 'transport'),
+                      FilterItemModel(
+                          filterTitle: 'Sports', filterKey: 'sports'),
+                      FilterItemModel(
+                          filterTitle: 'Transport', filterKey: 'transport'),
                     ],
                     previousApplied: [],
                     title: 'Industry',
@@ -104,7 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   FilterListModel(
                     filterOptions: [
-                      FilterItemModel(filterTitle: 'Utter Pradesh', filterKey: 'up'),
+                      FilterItemModel(
+                          filterTitle: 'Utter Pradesh', filterKey: 'up'),
                       FilterItemModel(
                         filterTitle: 'Madhya Pradesh',
                         filterKey: 'mp',
