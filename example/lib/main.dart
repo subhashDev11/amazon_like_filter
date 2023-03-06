@@ -82,17 +82,13 @@ class _MyHomePageState extends State<MyHomePage> {
               return FilterWidget(
                   filterProps: FilterProps(
                 themeProps: ThemeProps(
-                  activeFilterTextColor: Colors.orange,
-                  inActiveFilterTextColor: Colors.black,
-                  activeFilterHeaderColor: Colors.pink,
-                  dividerColor: Colors.yellow,
-                  checkBoxTileThemeProps: CheckBoxTileThemeProps(
-                    activeCheckBoxColor: Colors.green,
-                  ),
-                  submitButtonColor: Colors.purpleAccent,
-                  resetButtonColor: Colors.yellowAccent,
-                  dividerThickness: 5,
-                ),
+                    checkBoxTileThemeProps: CheckBoxTileThemeProps(
+                      activeCheckBoxColor: Colors.green,
+                    ),
+                    dividerThickness: 5,
+                    searchBarViewProps: SearchBarViewProps(
+                      filled: false,
+                    )),
                 onFilterChange: (value) {
                   setState(() {
                     applied = value;

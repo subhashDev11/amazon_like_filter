@@ -1,6 +1,6 @@
 name: amazon_like_filter
 description: 'AmazonLikeFilter is an widget that is used to build Filter UI like as amazon app.'
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/subhashDev11/amazon_like_filter
 
 environment:

@@ -34,9 +34,11 @@ class ThemeProps {
   final Widget? divider;
   final Color? dividerColor;
   final double? dividerThickness;
+  final SearchBarViewProps? searchBarViewProps;
   final CheckBoxTileThemeProps? checkBoxTileThemeProps;
 
   ThemeProps({
+    this.searchBarViewProps,
     this.titleStyle,
     this.titleColor,
     this.resetButtonColor,
@@ -70,5 +72,31 @@ class CheckBoxTileThemeProps {
     this.checkboxTitleColor,
     this.checkboxTitleStyle,
     this.tileColor,
+  });
+}
+
+class SearchBarViewProps {
+  final OutlineInputBorder? inputBorder;
+  final Color? fillColor;
+  final Color? clearIconColor;
+  final Color? searchIconColor;
+  final Widget? clearIcon;
+  final Widget? searchIcon;
+  final bool? filled;
+  final String? searchHint;
+  final TextStyle? textStyle;
+  final TextStyle? hintStyle;
+
+  SearchBarViewProps({
+    this.clearIconColor,
+    this.searchIconColor,
+    this.clearIcon,
+    this.searchIcon,
+    this.inputBorder,
+    this.fillColor,
+    this.filled,
+    this.searchHint,
+    this.hintStyle,
+    this.textStyle,
   });
 }

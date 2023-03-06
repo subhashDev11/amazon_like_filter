@@ -76,4 +76,48 @@ class FilterCubit extends Cubit<FilterState> {
       filterProps.onFilterChange!([]);
     }
   }
+
+  void filterBySearch(String text) {
+    if (text.isEmpty) {
+      return;
+    }
+    final filteringItem = filterProps.filters[state.activeFilterIndex];
+    final filterOption = [...filteringItem.filterOptions];
+    if (filterOption.isNotEmpty) {
+      List<FilterItemModel> searchedItems = [];
+      for (var element in filterOption) {
+        if (element.filterTitle.toLowerCase().contains(text.toLowerCase())) {
+          searchedItems.add(element);
+        }
+      }
+      List<FilterListModel> filters = [...state.filters];
+
+      final updatedItem = filters[state.activeFilterIndex].copyWith(
+        filterOptions: searchedItems,
+      );
+      filters[state.activeFilterIndex] = updatedItem;
+      emit(state.copyWith(
+        filters: filters,
+      ));
+    }
+  }
+
+  void clearSearch() {
+    final filteringItem = filterProps.filters[state.activeFilterIndex];
+    final filterOption = [...filteringItem.filterOptions];
+    if (filterOption.isNotEmpty) {
+      List<FilterItemModel> searchedItems = filterOption;
+
+      List<FilterListModel> filters = [...state.filters];
+
+      final updatedItem = filters[state.activeFilterIndex].copyWith(
+        filterOptions: searchedItems,
+      );
+
+      filters[state.activeFilterIndex] = updatedItem;
+      emit(state.copyWith(
+        filters: filters,
+      ));
+    }
+  }
 }
