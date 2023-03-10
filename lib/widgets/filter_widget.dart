@@ -1,3 +1,6 @@
+/// Main widget for filtering data
+/// Required parametter is FilterProps  
+
 import 'package:amazon_like_filter/filter_style_mixin.dart';
 import 'package:amazon_like_filter/state/filter_cubit.dart';
 import 'package:amazon_like_filter/props/filter_props.dart';
@@ -43,7 +46,6 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     _filterCubit = context.read<FilterCubit>();
     super.initState();
   }
@@ -367,7 +369,6 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _searchValueNotifier.dispose();
     _searchController.dispose();
     super.dispose();

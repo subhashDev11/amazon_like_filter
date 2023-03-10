@@ -1,3 +1,8 @@
+/*
+This is a Dart file that implements a Flutter Bloc
+for managing the filter item state filtering items. 
+Here's what each part of the code does:
+*/
 import 'package:amazon_like_filter/props/applied_filter_model.dart';
 import 'package:amazon_like_filter/props/filter_item_model.dart';
 import 'package:amazon_like_filter/props/filter_list_model.dart';

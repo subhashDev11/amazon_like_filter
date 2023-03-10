@@ -1,7 +1,10 @@
+/*
+This piece of code for that retrun the user interface for CheckboxTileView names as FilterCheckboxTitle.
+*/
+
 import 'package:amazon_like_filter/filter_style_mixin.dart';
 import 'package:amazon_like_filter/props/filter_props.dart';
 import 'package:flutter/material.dart';
-
 import 'filter_text.dart';
 
 class FilterCheckboxTitle extends StatelessWidget with FilterStyleMixin {

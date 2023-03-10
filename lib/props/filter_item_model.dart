@@ -4,18 +4,19 @@ class FilterItemModel extends Equatable {
   final String filterTitle;
   final String filterKey;
 
+  // Initialize the Filter Item Model with Title and Key as required parameters
   const FilterItemModel({
     required this.filterTitle,
     required this.filterKey,
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         filterTitle,
         filterKey,
       ];
 
+  // Convert the Filter Item Model into a Map format with the corresponding data in it.
   Map<String, dynamic> toMap() {
     return ({
       'filter_title': filterTitle,

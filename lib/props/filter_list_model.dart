@@ -1,6 +1,7 @@
 import 'package:amazon_like_filter/props/filter_item_model.dart';
 import 'package:equatable/equatable.dart';
 
+/// Filter option model
 class FilterListModel extends Equatable {
   final String? title;
   final String filterKey;

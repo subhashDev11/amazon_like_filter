@@ -1,3 +1,15 @@
+/*
+build and display the FilterTextButton widget.
+It returns an instance of the TextButton widget with its
+onPressed function calling the onTap function passed to 
+this widget. The child of the TextButton is an instance of 
+the Text widget where it gets its properties assigned. 
+However, if they are not assigned, the widget will be assigned 
+the defaults, such as an empty string for the text property. 
+Lastly, the style of the text is defined with various parameters
+that determine its appearance.
+*/
+
 import 'package:flutter/material.dart';
 
 class FilterTextButton extends StatelessWidget {

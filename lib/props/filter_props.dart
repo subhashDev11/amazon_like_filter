@@ -2,6 +2,11 @@ import 'package:amazon_like_filter/props/applied_filter_model.dart';
 import 'package:amazon_like_filter/props/filter_list_model.dart';
 import 'package:flutter/material.dart';
 
+/*
+This class represents the properties regarding how filters should look.
+It contains details like close icon, filter data, theme data, and event functions
+*/
+
 class FilterProps {
   final List<FilterListModel> filters;
   final String? title;
