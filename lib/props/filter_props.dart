@@ -6,10 +6,16 @@ class FilterProps {
   final List<FilterListModel> filters;
   final String? title;
   final ThemeProps? themeProps;
+  final Icon? closeIcon;
+  final bool? showCloseIcon;
+  final Function? onCloseTap;
 
   final Function(List<AppliedFilterModel> appliedFilterModel)? onFilterChange;
 
   FilterProps({
+    this.closeIcon,
+    this.onCloseTap,
+    this.showCloseIcon,
     required this.filters,
     this.onFilterChange,
     this.title,

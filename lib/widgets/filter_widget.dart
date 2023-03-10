@@ -62,20 +62,42 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
         return Scaffold(
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15,
-                  vertical: 5,
+                  vertical: 15,
                 ),
-                child: FilterText(
-                  title: _filterCubit.filterProps.title ?? 'Filters',
-                  style: themeProps?.titleStyle,
-                  fontColor: themeProps?.titleColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FilterText(
+                      title: _filterCubit.filterProps.title ?? 'Filters',
+                      style: themeProps?.titleStyle,
+                      fontColor: themeProps?.titleColor,
+                    ),
+                    Visibility(
+                      visible: (_filterCubit.filterProps.showCloseIcon ?? true),
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        visualDensity: const VisualDensity(
+                          horizontal: -4,
+                          vertical: -4,
+                        ),
+                        onPressed: () {
+                          if (_filterCubit.filterProps.onCloseTap != null) {
+                            _filterCubit.filterProps.onCloseTap!();
+                          }
+                          Navigator.of(context).pop();
+                        },
+                        icon: _filterCubit.filterProps.closeIcon ??
+                            const Icon(Icons.close),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 20,
               ),
               themeProps?.divider ??
                   Divider(
@@ -85,9 +107,10 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                   ),
               Expanded(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Padding(
                         padding: const EdgeInsets.only(
                           left: 10,
@@ -139,12 +162,14 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                               getDividerColor(context),
                         ),
                     Expanded(
-                      flex: 8,
+                      flex: 6,
                       child: Builder(builder: (context) {
-                        return Padding(
+                        return SingleChildScrollView(
                           padding: const EdgeInsets.all(10),
+                          physics: const BouncingScrollPhysics(),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -226,20 +251,15 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                                                               ?.searchIconColor,
                                                         ),
                                                   )),
-                                        onFieldSubmitted: (value) {
+                                        onFieldSubmitted: (value) {},
+                                        textInputAction: TextInputAction.search,
+                                        onChanged: (value) {
                                           _searchValueNotifier.value = value;
                                           if (value.isEmpty) {
                                             _clearSearch();
                                           } else {
                                             _filterCubit.filterBySearch(
                                                 _searchController.text);
-                                          }
-                                        },
-                                        textInputAction: TextInputAction.search,
-                                        onChanged: (value) {
-                                          _searchValueNotifier.value = value;
-                                          if (value.isEmpty) {
-                                            _clearSearch();
                                           }
                                         },
                                       );
@@ -265,29 +285,28 @@ class _FilterState extends State<Filter> with FilterStyleMixin {
                                       .filters[state.activeFilterIndex]
                                       .filterOptions;
                                   if (list.isNotEmpty) {
-                                    return Expanded(
-                                      child: ListView.builder(
-                                        itemCount: list.length,
-                                        itemBuilder: (_, index) {
-                                          final item = list[index];
-                                          return FilterCheckboxTitle(
-                                            checkBoxTileThemeProps: themeProps
-                                                ?.checkBoxTileThemeProps,
-                                            selected: _filterCubit.checked(
-                                              state
-                                                  .filters[
-                                                      state.activeFilterIndex]
-                                                  .previousApplied,
-                                              item,
-                                            ),
-                                            title: item.filterTitle,
-                                            onUpdate: (bool? value) {
-                                              _filterCubit
-                                                  .onFilterItemCheck(item);
-                                            },
-                                          );
-                                        },
-                                      ),
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: list.length,
+                                      itemBuilder: (_, index) {
+                                        final item = list[index];
+                                        return FilterCheckboxTitle(
+                                          checkBoxTileThemeProps: themeProps
+                                              ?.checkBoxTileThemeProps,
+                                          selected: _filterCubit.checked(
+                                            state
+                                                .filters[
+                                                    state.activeFilterIndex]
+                                                .previousApplied,
+                                            item,
+                                          ),
+                                          title: item.filterTitle,
+                                          onUpdate: (bool? value) {
+                                            _filterCubit
+                                                .onFilterItemCheck(item);
+                                          },
+                                        );
+                                      },
                                     );
                                   } else {
                                     return const SizedBox();

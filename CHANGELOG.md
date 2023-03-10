@@ -45,4 +45,6 @@
     8. String? searchHint;
     9. TextStyle? textStyle;
     10. TextStyle? hintStyle;
-   
+
+## 1.0.0
+* Close filter view button added & search trigger called by onChange 
